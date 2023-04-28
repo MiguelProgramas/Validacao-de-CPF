@@ -1,22 +1,20 @@
+númerosObrigatórios = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+todosOsNúmeros = []
+
 def remover_Ocorrências(lista, item):
     resultado = [i for i in lista if i != item]
     return resultado
 
 def validação_Estrutura_Valor_Inserido(valor_Inserido):
-    while True:
+    while len(valor_Inserido) != 14 or caracteres_Obrigatórios1 not in valor_Inserido or caracteres_Obrigatórios2 not in valor_Inserido:
         if len(valor_Inserido) != 14:
-            while len(valor_Inserido) != 14:
-                print("O valor inserido é inválido. Favor inserir uma sequência de 14 carácteres (incluindo pontos '.' e um hífem '-').")
-                print("Favor tentar novamente:")
-                valor_Inserido = input()
-        elif valor_Inserido not in caracteres_Obrigatórios:
-            while valor_Inserido not in caracteres_Obrigatórios:
-                print("O valor inserido não possui pontos e/ou um hífem.")
-                print("Favor tentar novamente:")
-                valor_Inserido = input()
-        else:
-            return None
-
+            print("O valor inserido é inválido. Favor inserir uma sequência de 14 carácteres (incluindo os números, os pontos e um hífem).")
+        if caracteres_Obrigatórios1 not in valor_Inserido:
+            print("O valor inserido não possui pontos.")
+        if caracteres_Obrigatórios2 not in valor_Inserido:
+            print("O valor inserido não possui um hífem.")
+        valor_Inserido = input("Favor tentar novamente: ")
+    return valor_Inserido
 
 while True:
     cpf = []
@@ -29,16 +27,15 @@ while True:
     index2 = -2
     multiplicações = []
     multiplicações2 = []
-    caracteres_Obrigatórios = ["-", "."]
+    caracteres_Obrigatórios2 = "-"
+    caracteres_Obrigatórios1 =  "."
 
     print("Insira o CPF a ser validado.")
     valor_Inserido = input()
 
-    validação_Estrutura_Valor_Inserido(valor_Inserido)
+    valor_Inserido = validação_Estrutura_Valor_Inserido(valor_Inserido)
 
-    for i in valor_Inserido:
-        valor = i
-        cpf.append(valor)
+    cpf = list(valor_Inserido)
 
     cpf = remover_Ocorrências(cpf, ".")
     cpfOriginal = remover_Ocorrências(cpf, "-")
